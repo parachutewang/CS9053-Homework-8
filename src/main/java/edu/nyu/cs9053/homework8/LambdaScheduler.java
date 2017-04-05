@@ -10,6 +10,7 @@ public class LambdaScheduler implements MaxNumberSubset {
 		jobResult = new JobCollection();
 	}
 
+	@Override
 	public JobCollection chooseMaxJobs(JobCollection jobCollection) {
 		jobCollection.sort();
 		Iterator<Job> iter = jobCollection.iterator();

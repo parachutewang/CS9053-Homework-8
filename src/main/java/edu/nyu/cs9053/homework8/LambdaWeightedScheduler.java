@@ -46,6 +46,7 @@ public class LambdaWeightedScheduler implements MaxValueSubset {
 			chooseMaxJobs(number - 1, jobCollection);
 	}
 
+	@Override
 	public WeightedJobCollection chooseMaxJobs(WeightedJobCollection jobCollection) {
 		jobCollection.sort();
 		findLatestJob(jobCollection);
