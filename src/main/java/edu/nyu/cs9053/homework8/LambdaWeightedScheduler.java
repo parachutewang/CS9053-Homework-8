@@ -1,18 +1,20 @@
 package edu.nyu.cs9053.homework8;
 
-public class LambdaWeightedScheduler {
+public class LambdaWeightedScheduler implements MaxValueSubset {
 
 	private final WeightedJobCollection jobResult;
-	private int maxValue[];
-	private int[] latestJob;
+	private final int maxValue[];
+	private final int[] latestJob;
+	private final int size;
 
-	public LambdaWeightedScheduler() {
+	public LambdaWeightedScheduler(WeightedJobCollection jobCollection) {
 		jobResult = new WeightedJobCollection();
+		this.maxValue = new int[jobCollection.size() + 1];
+		this.latestJob = new int[jobCollection.size() + 1];
+		this.size = jobCollection.size();
 	}
 
 	public void findLatestJob(WeightedJobCollection jobCollection) {
-		int size = jobCollection.size();
-		latestJob = new int[size + 1];
 		for (int i = 0; i <= size; i++)
 			latestJob[i] = 0;
 		for (int i = 2; i <= size; i++) {
@@ -26,7 +28,6 @@ public class LambdaWeightedScheduler {
 	}
 
 	public void findMaxValue(WeightedJobCollection jobCollection) {
-		maxValue = new int[jobCollection.size() + 1];
 		maxValue[0] = 0;
 		for (int i = 1; i <= jobCollection.size(); i++) {
 			int profit = jobCollection.get(i - 1).getValue();
@@ -46,7 +47,6 @@ public class LambdaWeightedScheduler {
 	}
 
 	public WeightedJobCollection chooseMaxJobs(WeightedJobCollection jobCollection) {
-		int size = jobCollection.size();
 		jobCollection.sort();
 		findLatestJob(jobCollection);
 		findMaxValue(jobCollection);
@@ -56,9 +56,9 @@ public class LambdaWeightedScheduler {
 
 	public static void main(String args[]) {
 		WeightedJobCollection jobCollection = new WeightedJobCollection();
-		LambdaWeightedScheduler scheduler = new LambdaWeightedScheduler();
 		jobCollection.add(new WeightedJob(1, 2, 100), new WeightedJob(2, 7, 300), new WeightedJob(3, 7, 500),
 				new WeightedJob(7, 9, 100), new WeightedJob(9, 10, 110), new WeightedJob(1, 2, 100));
+		LambdaWeightedScheduler scheduler = new LambdaWeightedScheduler(jobCollection);
 		WeightedJobCollection result = new WeightedJobCollection();
 		result = scheduler.chooseMaxJobs(jobCollection);
 		jobCollection.printMaxJob(result);

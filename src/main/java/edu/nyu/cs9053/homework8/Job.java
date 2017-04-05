@@ -18,8 +18,8 @@ public class Job {
 		return endTime;
 	}
 
-	public int setLabel(int label) {
-		return this.label = label;
+	public void setLabel(int label) {
+		this.label = label;
 	}
 
 	public int getLabel() {

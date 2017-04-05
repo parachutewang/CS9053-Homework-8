@@ -13,7 +13,8 @@ public class LambdaScheduler implements MaxNumberSubset {
 	public JobCollection chooseMaxJobs(JobCollection jobCollection) {
 		jobCollection.sort();
 		Iterator<Job> iter = jobCollection.iterator();
-		jobResult.add(iter.next());
+		if (iter.hasNext())
+			jobResult.add(iter.next());
 		while (iter.hasNext()) {
 			Job job = iter.next();
 			if (job.getStartTime() >= jobResult.get(jobResult.size() - 1).getEndTime())
@@ -24,9 +25,9 @@ public class LambdaScheduler implements MaxNumberSubset {
 
 	public static void main(String args[]) {
 		JobCollection jobCollection = new JobCollection();
-		LambdaScheduler scheduler = new LambdaScheduler();
 		jobCollection.add(new Job(1, 2), new Job(2, 7), new Job(1, 3), new Job(4, 6), new Job(4, 7), new Job(3, 5),
 				new Job(5, 6), new Job(6, 8));
+		LambdaScheduler scheduler = new LambdaScheduler();
 		JobCollection result = new JobCollection();
 		result = scheduler.chooseMaxJobs(jobCollection);
 		jobCollection.printMaxJob(result);

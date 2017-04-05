@@ -2,7 +2,7 @@ package edu.nyu.cs9053.homework8;
 
 public class WeightedJob extends Job {
 
-	private int value;
+	private final int value;
 
 	public WeightedJob(int startTime, int endTime, int value) {
 		super(startTime, endTime);
